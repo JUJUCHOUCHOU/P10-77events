@@ -14,13 +14,7 @@ import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
   
-  const { last, events = [] } = useData(); // Fournissez un tableau vide par défaut pour events
-  
-  // Tri les événements
-  events.sort((a, b) => new Date(b.date) - new Date(a.date));
-  
-  // événement le plus récent (premier élément après le tri)
-  const mostRecentEvent = events[0];
+  const { lastEvent } = useData();
 
   return <>
     <header>
@@ -124,14 +118,15 @@ const Page = () => {
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
-        {console.log(mostRecentEvent)}
+        {lastEvent && lastEvent.cover && lastEvent.title && lastEvent.title &&
         <EventCard
-              imageSrc={mostRecentEvent?.cover}
-              title={mostRecentEvent?.title}
-              date={new Date(mostRecentEvent?.date)}
-              small
-              label="boom"
-        />
+        imageSrc={lastEvent.cover}
+        title={lastEvent.title}
+        date={new Date(lastEvent.date)}
+        small
+        label="boom"
+  />}
+        
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
